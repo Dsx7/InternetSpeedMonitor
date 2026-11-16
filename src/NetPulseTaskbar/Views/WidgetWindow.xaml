@@ -1,0 +1,117 @@
+<Window x:Class="NetPulseTaskbar.Views.WidgetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:NetPulseTaskbar.Controls"
+        Title="NetPulse Taskbar"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Topmost="True"
+        ResizeMode="NoResize"
+        SizeToContent="Manual"
+        Width="140"
+        Height="36"
+        MouseLeftButtonDown="OnMouseLeftButtonDown"
+        MouseMove="OnMouseMove"
+        MouseLeftButtonUp="OnMouseLeftButtonUp"
+        MouseEnter="OnMouseEnter"
+        MouseLeave="OnMouseLeave"
+        MouseRightButtonUp="OnMouseRightButtonUp"
+        MouseDoubleClick="OnMouseDoubleClick">
+
+    <Window.Resources>
+        <DropShadowEffect x:Key="WidgetDropShadow" BlurRadius="6" ShadowDepth="1" Direction="270" Color="#000000" Opacity="0.6"/>
+        <DropShadowEffect x:Key="TextDropShadow" BlurRadius="3" ShadowDepth="1" Direction="270" Color="#000000" Opacity="0.8"/>
+    </Window.Resources>
+
+    <Grid x:Name="RootGrid" SnapsToDevicePixels="True" UseLayoutRounding="True">
+        <!-- Main Container Pill -->
+        <Border x:Name="ContainerBorder"
+                Background="#E6111827"
+                BorderBrush="#33475569"
+                BorderThickness="1"
+                CornerRadius="6"
+                Padding="6,2"
+                ClipToBounds="True">
+            
+            <Grid>
+                <!-- Mini Sparkline Background Chart -->
+                <controls:SparklineCanvas x:Name="MiniSparkline"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
+                                          Opacity="0.45"
+                                          Visibility="Visible"
+                                          IsHitTestVisible="False"/>
+
+                <!-- Content Layout: Vertical Stacked Mode -->
+                <Grid x:Name="VerticalLayout" Visibility="Visible" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Top Row -->
+                    <TextBlock x:Name="TopRowText"
+                               Grid.Row="0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Text="↓  0.0 KB/s"
+                               FontFamily="Segoe UI Variable Display"
+                               FontSize="10.5"
+                               FontWeight="SemiBold"
+                               Foreground="#00E676"
+                               Typography.NumeralAlignment="Tabular"/>
+
+                    <!-- Bottom Row -->
+                    <TextBlock x:Name="BottomRowText"
+                               Grid.Row="1"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Text="↑  0.0 KB/s"
+                               FontFamily="Segoe UI Variable Display"
+                               FontSize="10.5"
+                               FontWeight="SemiBold"
+                               Foreground="#38BDF8"
+                               Typography.NumeralAlignment="Tabular"/>
+                </Grid>
+
+                <!-- Content Layout: Horizontal Single-Line Mode -->
+                <StackPanel x:Name="HorizontalLayout"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Visibility="Collapsed">
+                    <TextBlock x:Name="HorizFirstText"
+                               Text="↓ 0.0 KB/s"
+                               FontFamily="Segoe UI Variable Display"
+                               FontSize="11"
+                               FontWeight="SemiBold"
+                               Foreground="#00E676"
+                               Margin="0,0,8,0"
+                               Typography.NumeralAlignment="Tabular"/>
+                    <TextBlock x:Name="HorizSecondText"
+                               Text="↑ 0.0 KB/s"
+                               FontFamily="Segoe UI Variable Display"
+                               FontSize="11"
+                               FontWeight="SemiBold"
+                               Foreground="#38BDF8"
+                               Typography.NumeralAlignment="Tabular"/>
+                </StackPanel>
+
+                <!-- Content Layout: Single Stream Mode (Download Only or Upload Only) -->
+                <Grid x:Name="SingleLayout" Visibility="Collapsed" VerticalAlignment="Center">
+                    <TextBlock x:Name="SingleText"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="↓ 0.0 KB/s"
+                               FontFamily="Segoe UI Variable Display"
+                               FontSize="13"
+                               FontWeight="Bold"
+                               Foreground="#00E676"
+                               Typography.NumeralAlignment="Tabular"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

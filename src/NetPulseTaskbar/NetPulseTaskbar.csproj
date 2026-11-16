@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>12.0</LangVersion>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <NoWarn>$(NoWarn);WFAC010</NoWarn>
+    <AssemblyName>NetPulseTaskbar</AssemblyName>
+    <RootNamespace>NetPulseTaskbar</RootNamespace>
+    
+    <!-- Single-File Self-Contained Executable Configuration -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebuggerSupport>false</DebuggerSupport>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    
+    <!-- Versioning & Assembly Metadata -->
+    <AssemblyTitle>NetPulse Taskbar Network Speed Monitor</AssemblyTitle>
+    <AssemblyDescription>Production-Grade Real-Time Windows Taskbar Network Telemetry Monitor</AssemblyDescription>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.0</Version>
+    <Authors>Al Helal Mohammod Bayijid</Authors>
+    <Company>Al Helal Mohammod Bayijid</Company>
+    <Product>NetPulse Taskbar</Product>
+    <Copyright>Copyright © 2026 Al Helal Mohammod Bayijid</Copyright>
+    <RepositoryUrl>https://github.com/Dsx7/InternetSpeedMonitor</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Dsx7/InternetSpeedMonitor</PackageProjectUrl>
+  </PropertyGroup>
+
+</Project>
