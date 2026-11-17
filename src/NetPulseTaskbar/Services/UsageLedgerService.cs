@@ -110,11 +110,74 @@ namespace NetPulseTaskbar.Services
             return new UsageRecord { DateKey = todayKey };
         }
 
-        public List<UsageRecord> GetHistoryList()
+        public UsageRecord GetThisMonthUsage()
+        {
+            string monthPrefix = DateTime.Now.ToString("yyyy-MM");
+            lock (_lock)
+            {
+                long dl = 0;
+                long ul = 0;
+                foreach (var kvp in _data.DailyRecords)
+                {
+                    if (kvp.Key.StartsWith(monthPrefix, StringComparison.OrdinalIgnoreCase))
+                    {
+                        dl += kvp.Value.DownloadBytes;
+                        ul += kvp.Value.UploadBytes;
+                    }
+                }
+                return new UsageRecord
+                {
+                    DateKey = monthPrefix,
+                    DownloadBytes = dl,
+                    UploadBytes = ul
+                };
+            }
+        }
+
+        public UsageRecord GetAllTimeUsage()
         {
             lock (_lock)
             {
-                return _data.DailyRecords.Values
+                long dl = 0;
+                long ul = 0;
+                foreach (var r in _data.DailyRecords.Values)
+                {
+                    dl += r.DownloadBytes;
+                    ul += r.UploadBytes;
+                }
+                return new UsageRecord
+                {
+                    DateKey = "All-Time",
+                    DownloadBytes = dl,
+                    UploadBytes = ul
+                };
+            }
+        }
+
+        public List<string> GetAvailableMonths()
+        {
+            lock (_lock)
+            {
+                return _data.DailyRecords.Keys
+                    .Select(k => k.Length >= 7 ? k.Substring(0, 7) : "")
+                    .Where(m => !string.IsNullOrEmpty(m))
+                    .Distinct()
+                    .OrderByDescending(m => m)
+                    .ToList();
+            }
+        }
+
+        public List<UsageRecord> GetDailyRecordsForMonth(string? yyyyMM = null)
+        {
+            lock (_lock)
+            {
+                var query = _data.DailyRecords.Values.AsEnumerable();
+                if (!string.IsNullOrEmpty(yyyyMM) && yyyyMM != "All")
+                {
+                    query = query.Where(r => r.DateKey.StartsWith(yyyyMM, StringComparison.OrdinalIgnoreCase));
+                }
+
+                return query
                     .OrderByDescending(r => r.DateKey)
                     .Select(r => new UsageRecord
                     {
@@ -124,6 +187,11 @@ namespace NetPulseTaskbar.Services
                     })
                     .ToList();
             }
+        }
+
+        public List<UsageRecord> GetHistoryList()
+        {
+            return GetDailyRecordsForMonth(null);
         }
 
         public void Save()

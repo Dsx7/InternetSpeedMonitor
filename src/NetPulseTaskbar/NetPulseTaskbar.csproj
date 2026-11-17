@@ -10,6 +10,7 @@
     <LangVersion>12.0</LangVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
     <NoWarn>$(NoWarn);WFAC010</NoWarn>
     <AssemblyName>NetPulseTaskbar</AssemblyName>
     <RootNamespace>NetPulseTaskbar</RootNamespace>
@@ -38,5 +39,9 @@
     <RepositoryUrl>https://github.com/Dsx7/InternetSpeedMonitor</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Dsx7/InternetSpeedMonitor</PackageProjectUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\app.ico" />
+  </ItemGroup>
 
 </Project>

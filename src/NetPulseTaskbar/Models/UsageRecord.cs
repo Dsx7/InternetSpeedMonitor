@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace NetPulseTaskbar.Models
 {
@@ -12,6 +13,41 @@ namespace NetPulseTaskbar.Models
         public string FormattedDownload => FormatBytes(DownloadBytes);
         public string FormattedUpload => FormatBytes(UploadBytes);
         public string FormattedTotal => FormatBytes(TotalBytes);
+
+        public string FriendlyDateString
+        {
+            get
+            {
+                if (DateTime.TryParseExact(DateKey, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt))
+                {
+                    if (dt.Date == DateTime.Today) return $"Today ({dt:dd MMM yyyy})";
+                    if (dt.Date == DateTime.Today.AddDays(-1)) return $"Yesterday ({dt:dd MMM yyyy})";
+                    return dt.ToString("dd MMM yyyy");
+                }
+                return DateKey;
+            }
+        }
+
+        public string DayOfWeekName
+        {
+            get
+            {
+                if (DateTime.TryParseExact(DateKey, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt))
+                {
+                    return dt.ToString("dddd");
+                }
+                return "";
+            }
+        }
+
+        public double DownloadPercentOfTotal
+        {
+            get
+            {
+                if (TotalBytes <= 0) return 0;
+                return (DownloadBytes / (double)TotalBytes) * 100.0;
+            }
+        }
 
         public static string FormatBytes(long bytes)
         {

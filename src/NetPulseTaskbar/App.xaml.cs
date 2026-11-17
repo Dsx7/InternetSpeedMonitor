@@ -137,6 +137,7 @@ namespace NetPulseTaskbar
             _widgetWindow?.Close();
             _dashboardWindow?.Close();
             _settingsWindow?.Close();
+            _aboutWindow?.Close();
 
             _singleInstanceMutex?.ReleaseMutex();
             _singleInstanceMutex?.Dispose();

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Interop;
 using Microsoft.Win32;
 using NetPulseTaskbar.Models;
 using NetPulseTaskbar.Native;
@@ -33,6 +34,13 @@ namespace NetPulseTaskbar.Views
             _config = configService.Current;
 
             Loaded += OnLoaded;
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            var hwnd = new WindowInteropHelper(this).Handle;
+            NativeMethods.EnableImmersiveDarkMode(hwnd);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

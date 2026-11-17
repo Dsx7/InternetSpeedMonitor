@@ -2,7 +2,9 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Navigation;
+using NetPulseTaskbar.Native;
 
 namespace NetPulseTaskbar.Views
 {
@@ -23,6 +25,13 @@ namespace NetPulseTaskbar.Views
                 }
             }
             catch { }
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            var hwnd = new WindowInteropHelper(this).Handle;
+            NativeMethods.EnableImmersiveDarkMode(hwnd);
         }
 
         private void OnHyperlinkRequestNavigate(object sender, RequestNavigateEventArgs e)

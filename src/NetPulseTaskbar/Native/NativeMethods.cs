@@ -133,6 +133,21 @@ namespace NetPulseTaskbar.Native
         public const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
         public const int DWMWA_WINDOW_CORNER_PREFERENCE = 33;
 
+        public static void EnableImmersiveDarkMode(IntPtr hwnd)
+        {
+            if (hwnd == IntPtr.Zero) return;
+            int darkMode = 1;
+            try
+            {
+                // Attribute 20 for Windows 10 20H1+ and Windows 11
+                DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, ref darkMode, sizeof(int));
+                // Attribute 19 for older builds of Windows 10
+                int oldAttr = 19;
+                DwmSetWindowAttribute(hwnd, oldAttr, ref darkMode, sizeof(int));
+            }
+            catch { }
+        }
+
         public static void SetWindowStyle(IntPtr hwnd, bool clickThrough)
         {
             if (hwnd == IntPtr.Zero) return;
