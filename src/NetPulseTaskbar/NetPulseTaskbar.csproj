@@ -29,9 +29,9 @@
     <!-- Versioning & Assembly Metadata -->
     <AssemblyTitle>NetPulse Taskbar Network Speed Monitor</AssemblyTitle>
     <AssemblyDescription>Production-Grade Real-Time Windows Taskbar Network Telemetry Monitor</AssemblyDescription>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
     <Authors>Al Helal Mohammod Bayijid</Authors>
     <Company>Al Helal Mohammod Bayijid</Company>
     <Product>NetPulse Taskbar</Product>
